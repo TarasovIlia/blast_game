@@ -87,18 +87,10 @@ export default class TilesGrid {
   }
 
   getClosesTiles(tile) {
-    const closesTiles = [tile];
-
-    function safePush(checkingTile) {
-      if (
-        !closesTiles.includes(checkingTile)
-      ) {
-        closesTiles.push(checkingTile);
-      }
-    }
+    const closesTiles = new Set([tile]);
 
     function checkClosesTiles() {
-      const prevLength = closesTiles.length;
+      const prevLength = closesTiles.size;
       closesTiles.forEach((closesTile) => {
         const columnIndex = closesTile.getColumnIndex();
         const tileIndex = closesTile.getTileIndex();
@@ -112,26 +104,26 @@ export default class TilesGrid {
 
         closestColumns.forEach((column) => {
           if (column && column[tileIndex]?.color === closesTile.color) {
-            safePush(column[tileIndex]);
+            closesTiles.add(column[tileIndex]);
           }
         });
 
         closesVerticalTiles.forEach((_tile) => {
           if (_tile && _tile.color === closesTile.color) {
-            safePush(_tile);
+            closesTiles.add(_tile);
           }
         });
       });
 
       // if closesTiles length has not changed that means there is no more tile with the same color
-      if (prevLength !== closesTiles.length) {
+      if (prevLength !== closesTiles.size) {
         checkClosesTiles.apply(this);
       }
     }
 
     checkClosesTiles.apply(this);
 
-    return closesTiles;
+    return Array.from(closesTiles);
   }
 
   removeTile(tiles) {
