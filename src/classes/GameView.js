@@ -1,5 +1,5 @@
-import images from '../../images';
-import { BACKGROUND_PADDING, TILE_PADDING } from '../../constants/index';
+import images from '../images';
+import { BACKGROUND_PADDING, TILE_PADDING } from '../constants/index';
 
 const boostImage = new Image();
 boostImage.src = images.boost;

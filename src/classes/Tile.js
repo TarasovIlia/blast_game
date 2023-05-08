@@ -1,4 +1,4 @@
-import images from '../../images';
+import images from '../images';
 
 export default class Tile {
   constructor(x, y, color, size, setIsTilesMove) {

@@ -1,25 +1,15 @@
-import TilesGrid from '../TilesGrid';
-import Indicators from '../Indicators';
-import GameView from '../GameView';
-import Boost from '../Boost';
 import {
   INTERFACE_EVENT, TILES_EVENT, SHUFFLE_BOOST, TELEPORT_BOOST, TILE_PADDING,
-} from '../../constants/index';
-import { getInterfaceTarget, callWithInterval } from '../../utils';
+} from '../constants/index';
+import { getInterfaceTarget, callWithInterval } from '../utils';
 
 export default class Game {
-  constructor(gameSettings) {
-    this.canvas = document.querySelector('canvas');
-    this.tilesGrid = new TilesGrid(gameSettings);
-    this.gameIndicators = new Indicators(gameSettings);
-    this.boost = new Boost();
-    this.gameView = new GameView(
-      this.canvas,
-      this.tilesGrid,
-      gameSettings.tileSize,
-      this.gameIndicators,
-      this.boost,
-    );
+  constructor(gameSettings, canvas, gameView, gameIndicators, boost, tilesGrid) {
+    this.canvas = canvas;
+    this.gameView = gameView;
+    this.boost = boost;
+    this.tilesGrid = tilesGrid;
+    this.gameIndicators = gameIndicators;
     this.tilesSize = gameSettings.tileSize;
   }
 
